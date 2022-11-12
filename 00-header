@@ -8,5 +8,20 @@ if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
 fi
 
 echo
-printf "\033[1;32mWelcome to %s (%s).\n\033[0m" "$DISTRIB_DESCRIPTION" "$(uname -r)"
+printf "\e[0;90m"
+printf "  \/________________   \n"
+printf " /     _____________)  \n"
+printf "/     /     /   \ |    \n"
+printf "\/\/\/     (O) (O)|    \n"
+printf "  |           ------,  \n"
+printf "  |  _       ______/   \n"
+printf "  | (_      /   \  \         ********************************************************************\n"
+printf "  |        /  ___\_ \  ___/ *   \e[0;90mRunning \e[0;97m%s\e[0;90m (\e[0;97m%s %s %s\e[0;90m)  *\n" "$DISTRIB_DESCRIPTION" "$(uname -o)" "$(uname -r)" "$(uname -m)"
+printf "  |        \      / /     \ *   \e[0;90mToday is \e[0;97m%s %s %s\e[0;90m                       *\n" "$(date)"
+printf "__|_________\______/         ********************************************************************\n"
+printf "\______________\./__\  \n"
+printf " /     .       | \  |  \n"
+printf " \    /_\   .  |  \ |\ \n"
+printf " |.\       /_\  |   \| \ \n"
+printf ""
 echo
