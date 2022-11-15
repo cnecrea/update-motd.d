@@ -1,5 +1,8 @@
 #!/bin/sh
 
+ppid1=`cat /proc/$PPID/status | grep PPid | awk '{ print $2 }'`
+ppid2=`cat /proc/$ppid1/status | grep PPid | awk '{ print $2 }'`
+username=`ps -x | grep $ppid2 | awk '{ print $6 }' |  sed "s/[[:digit:].-]//g"`
 user=$(whoami)
 date=`date`
 load=`cat /proc/loadavg | awk '{print $1" (1 minute) "$2" (5 minutes) "$3" (15 minutes)"}'`
@@ -10,13 +13,12 @@ memory_usage=`free | awk '/Mem/{printf("%.1f%"), $3/($2+.000000001)*100} /buffer
 memory=`free -m | awk '/Mem:/ { print $2 }'`
 memory_used=`free -m | awk '/buffers\/cache/ { print $3 }'`
 swap_usage=`free -m | awk '/Swap/ { printf("%3.1f%%", "exit !$2;$3/$2*100") }'`
-users=` w -s | grep -v WHAT | grep -v "load average" | wc -l`
+users=`netstat -tnpa | grep 'ESTABLISHED.*sshd' | grep $username | wc -l`
 time=`uptime | grep -ohe 'up .*' | sed 's/,/\ hours/g' | awk '{ printf $2" "$3 }'`
 processes_total=`ps aux | wc -l`
-processes_user=`ps -U ${user} u | wc -l`
+processes_user=`ps -u $username | wc -l`
 ip=`ifconfig $(route | grep default | awk '{ print $8 }') | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'`
-lastlog=`lastlog -u ${user} | grep -v Latest |  awk '{ printf $5" "$6" "$7" "$9" from "$3 }')`
-
+lastlog=`lastlog -u $username | grep -v Latest |  awk '{ printf $5" "$6" "$7" "$9" from "$3 }'`
 
 echo "\e[0;97mLast login: \e[37m"$lastlog
 echo "\e[0;97mSSH logins: \e[37m"$users "open sessions"
@@ -27,3 +29,4 @@ echo "\e[0;97mMemory usage: \e[37m""$memory_usage"
 echo "\e[0;97mHDD usage: \e[37m"$root_used"/"$root_total "("$root_usage")"
 echo "\e[0;97mProcesses: \e[37m"$processes_total "total," $processes_user "yours"
 echo
+
