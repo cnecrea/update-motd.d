@@ -28,5 +28,4 @@ echo "\e[0;97mSystem load: \e[37m"$load
 echo "\e[0;97mMemory usage: \e[37m""$memory_usage"
 echo "\e[0;97mHDD usage: \e[37m"$root_used" available / "$root_total "("$root_usage") used"
 echo "\e[0;97mProcesses: \e[37m"$processes_total "total," $processes_user "yours"
-echo
 
