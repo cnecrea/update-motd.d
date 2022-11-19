@@ -9,24 +9,8 @@ fi
 
 echo
 printf "\e[0;90m"
-printf "         _"
-printf "       /X \ "
-printf "     _------_"
-printf "    /        \"
-printf "   |          |"
-printf "   |          |"
-printf "   |     __  __)"
-printf "   |    /  \/  \"
-printf "  /\/\ (o   )o  )"
-printf "  /c    \__/ --."
-printf "  \_   _-------'"
-printf "   |  /         \"
-printf "   | | '\________)"
-printf "   |  \_____)"
-printf "   |_____ |"
-printf "  |_____/\/\"
-printf "  /        \"
-printf ""
+
+
 
 
 printf "  \/________________   \n"
